@@ -146,5 +146,3 @@ def run(user_input):
             if isinstance(value["messages"][-1], BaseMessage):
                 # 如果消息是 BaseMessage 类型，则打印机器人的回复
                 print("Assistant:", value["messages"][-1].content)
-
-run("西安今天的天气如何？")
