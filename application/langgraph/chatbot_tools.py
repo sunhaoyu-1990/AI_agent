@@ -11,8 +11,14 @@ from typing import Literal
 from langchain_core.messages import ToolMessage
 from langchain_core.messages import BaseMessage
 
+LANGCHAIN_TRACING_V2=True
+LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+LANGCHAIN_PROJECT="chatbot_tools"
+
 if not os.environ.get("TAVILY_API_KEY"):
     os.environ["TAVILY_API_KEY"] = getpass.getpass(f"请输入您的 TAVILY API 密钥：")
+if not os.environ.get("LANGCHAIN_API_KEY"):
+    os.environ["LANGCHAIN_API_KEY"] = getpass.getpass(f"请输入您的 LangSmith API 密钥：")
 # 定义 Tavily 搜索工具，最大搜索结果数设置为 2
 tool = TavilySearchResults(max_results=2)
 tools = [tool]
@@ -146,3 +152,6 @@ def run(user_input):
             if isinstance(value["messages"][-1], BaseMessage):
                 # 如果消息是 BaseMessage 类型，则打印机器人的回复
                 print("Assistant:", value["messages"][-1].content)
+
+if __name__ == "__main__":
+    run("西安明天天气怎么样？")
